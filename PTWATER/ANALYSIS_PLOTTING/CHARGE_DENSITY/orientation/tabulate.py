@@ -14,93 +14,36 @@ from matplotlib.colors import LogNorm
 import os
 
 frames=int(sys.argv[1])
-##############################################################################################
-f=open('sdel1','r')
+
+
+def anglem(za1,zb1):
+       l1=zb1-za1
+       l2=np.array([0,0,1])
+       dist1=np.linalg.norm(l1)
+       dist2=np.linalg.norm(l2)
+       cosine_angle=np.dot(l1,l2) / (dist1 * dist2)
+       return cosine_angle
+##########################################################
+f=open('del1','r')
 a=f.readlines()
 f.close
 
-f=open('sdel2','r')
-b=f.readlines()
-f.close
-
-f=open('sddel1','r')
+f=open('ddel1','r')
 aa=f.readlines()
 f.close
 
-f=open('sddel2','r')
+f=open('del2','r')
+b=f.readlines()
+f.close
+
+f=open('ddel2','r')
 bb=f.readlines()
 f.close
 
 ##########################################################
-f=open('del1','r')
-pa=f.readlines()
-f.close
 
-f=open('ddel1','r')
-paa=f.readlines()
-f.close
+const1=13.8593*14.4030
 
-f=open('del2','r')
-pb=f.readlines()
-f.close
-
-f=open('ddel2','r')
-pbb=f.readlines()
-f.close
-
-##########################################################
-cutoff=-5
-cutoff2=50
-fftz=360
-
-kx1=np.zeros((fftz,frames))
-kx2=np.zeros((fftz,frames))
-kx3=np.zeros((fftz,frames))
-kx4=np.zeros((fftz,frames))
-ky1=np.zeros((fftz,frames))
-ky2=np.zeros((fftz,frames))
-ky3=np.zeros((fftz,frames))
-ky4=np.zeros((fftz,frames))
-
-const1=13.8593*14.4030 
-
-const2=4.80320*const1 #(eA to Debye)
-const3=6.241506363094*10**(18)*3.33304*10**(-30)*-1.60217663*10**(-19)/(10.8*8.854*10**(-12)*10**(-20))
-
-const4=1.60217663*10**(-19)*10**(6)/(10**(-16))
-
-const5=(-1.60217663*10**(-19)*1.60217663*10**(-19)*6.241509*10**(18))/(8.854*10**(-12)*10**(-10))
-const6=4.80320*const1
-
-dz=0.341201*0.529177
-
-wf1=[]
-wwf1=[]
-dip1=[]
-ddip1=[]
-cds1=[]
-scds1=[]
-
-wf2=[]
-wwf2=[]
-dip2=[]
-ddip2=[]
-cds2=[]
-scds2=[]
-
-wf3=[]
-wwf3=[]
-dip3=[]
-ddip3=[]
-cds3=[]
-scds3=[]
-
-wf4=[]
-wwf4=[]
-dip4=[]
-ddip4=[]
-cds4=[]
-scds4=[]
 
 for i in range(frames):
 
@@ -108,157 +51,138 @@ for i in range(frames):
     a2=[]
     a3=[]
     a4=[]
-    b1=[]
-    b2=[]
-    b3=[]
-    b4=[]
+
     c1=[]
     c2=[]
     c3=[]
     c4=[]
     
-    k2=[]
-    k4=[]
-
-
-###
-    for j in range(660-30,660):
-        t=a[j+i*660].split()
-        a1.append(t)
-    for j in range(660-120,660-120+30):
-        t=a[j+i*660].split()
-        b1.append(t)
     d1=[]
-    for j in range(0,540):
-        t=a[j+i*660].split()
-        d1.append(t)
-    
-    d1=np.array(d1,float)
-    c1.append(np.amax(d1))
-
-
-###
-    for j in range(660-30,660):
-        t=b[j+i*660].split()
-        a2.append(t)
-    for j in range(660-120,660-120+30):
-        t=b[j+i*660].split()
-        b2.append(t)
     d2=[]
-    for j in range(0,540):
-        t=b[j+i*660].split()
-        d2.append(t)
-
-    d2=np.array(d2,float)
-    c2.append(np.amax(d2))
-
-    for j in range(660,660):
-        t=b[j+i*660].split()
-        k2.append(t)
-
-###
-    for j in range(660-30,660):
-        t=aa[j+i*660].split()
-        a3.append(t)
-    for j in range(660-120,660-120+30):
-        t=aa[j+i*660].split()
-        b3.append(t)
     d3=[]
-    for j in range(0,540):
-        t=aa[j+i*660].split()
-        d3.append(t)
-
-    d3=np.array(d3,float)
-    c3.append(np.amax(d3))
+    d4=[]
 
 ###
     for j in range(660-30,660):
-        t=bb[j+i*660].split()
-        a4.append(t)
-    for j in range(660-120,660-120+30):
-        t=bb[j+i*660].split()
-        b4.append(t)
-    d4=[]
-    for j in range(0,540):
-        t=bb[j+i*660].split()
+        t=a[j+i*660].split()
+        a1.append(t[3])
+    for j in range(0,540,3):
+        t=a[j+i*660].split()
+        c1.append(t[1:])
+        t=a[j+1+i*660].split()
+        d1.append(t[1:])
+        t=a[j+2+i*660].split()
+        d1.append(t[1:])
+    
+
+###
+    for j in range(660-30,660):
+        t=b[j+i*675].split()
+        a2.append(t[3])
+    for j in range(0,540,3):
+        t=b[j+i*675].split()
+        c2.append(t[1:])
+        t=b[j+1+i*675].split()
+        d2.append(t[1:])
+        t=b[j+2+i*675].split()
+        d2.append(t)
+    for j in range(660,675):
+        t=b[j+i*675].split()
+        d2.append(t[1:])
+
+
+###
+    for j in range(660-30,660):
+        t=aa[j+i*660].split()
+        a3.append(t[3])
+    for j in range(0,540,3):
+        t=aa[j+i*660].split()
+        c3.append(t[1:])
+        t=aa[j+1+i*660].split()
+        d3.append(t[1:])
+        t=aa[j+2+i*660].split()
+        d3.append(t[1:])
+
+###
+    for j in range(660-30,660):
+        t=bb[j+i*675].split()
+        a4.append(t[3])
+    for j in range(0,540,3):
+        t=bb[j+i*675].split()
+        c4.append(t[1:])
+        t=bb[j+1+i*675].split()
+        d4.append(t[1:])
+        t=bb[j+2+i*675].split()
         d4.append(t)
+    for j in range(660,675):
+        t=bb[j+i*675].split()
+        d4.append(t[1:])
 
-    d4=np.array(d4,float)
-    c4.append(np.amax(d4))
 
-    for j in range(660,660):
-        t=b[j+i*660].split()
-        k4.append(t)
 
 ###
     a1=np.array(a1,float)
     a2=np.array(a2,float)
     a3=np.array(a3,float)
     a4=np.array(a4,float)
-    b1=np.array(b1,float)
-    b2=np.array(b2,float)
-    b3=np.array(b3,float)
-    b4=np.array(b4,float)
+
     c1=np.array(c1,float)
     c2=np.array(c2,float)
     c3=np.array(c3,float)
     c4=np.array(c4,float)
+
+    d1=np.array(d1,float)
+    d2=np.array(d2,float)
+    d3=np.array(d3,float)
+    d4=np.array(d4,float)
     
-    k2=np.array(k2,float)
-    k4=np.array(k4,float)
     
     val1=np.mean(a1)
     val2=np.mean(a2)
     val3=np.mean(a3)
     val4=np.mean(a4)
-    vval1=np.mean(b1)
-    vval2=np.mean(b2)
-    vval3=np.mean(b3)
-    vval4=np.mean(b4)
     
-    
-    mid1=(vval1 - val1)*0.5
-    mid2=(vval2 - val2)*0.5
-    mid3=(vval3 - val3)*0.5
-    mid4=(vval4 - val4)*0.5
-    
-    mmid1=(70 + np.mean(c1))*0.5 - val1
-    mmid2=(70 + np.mean(c2))*0.5 - val2
-    mmid3=(70 + np.mean(c3))*0.5 - val3
-    mmid4=(70 + np.mean(c4))*0.5 - val4
-    
-    
-    k2=k2-val2
-    k4=k4-val4
-    
-    kmean2=np.mean(k2[k2 < 2.0])
-    kmean4=np.mean(k4[k4 < 2.0])
+##############################################################################################i
+    xxx=[]
+    yyy=[]
+    for i in range(frames):
+        for j in range(len(c1)):
+           hyd=0
+           sam=np.array(c1[j][0:3],float)
+           a1=sam
 
+           hhh1=np.zeros(len(d1),float)
+           hhh2=np.zeros(len(d1),3,float)
+           counter2=0
+
+           for t in range(len(d1)):
+               sam=np.array(d1[t],float)
+               b1=sam
+               nnn1=np.zeros(9,float)
+               nnn4=np.zeros((9,3),float)
+               counter1=0
+
+               for k1 in range(-1,2):
+                   for k2 in range(-1,2):
+                      bb1=np.array(b1+k1*vec1[0,:]+k2*vec1[1,:],float)
+                      h1=np.linalg.norm(bb1-a1)
+                      nnn1[counter1]=h1
+                      nnn4[counter1]=bb1
+                      counter1=counter1+1
+
+               hhh1[counter2]=np.min(nnn1)
+               hhh2[counter2]=nnn4[np.argmin(nnn1)]
+               counter2+=1  
+
+           dipole=c1[3]*c1[1:]
+           for t in range(len(d1)):
+               if hhh1 < 1.32:
+                  cost=anglem(a1,hhh2) 
+                  
+                                   
+                  
+ 
 ##############################################################################################
-    
-    z1=[]
-    z2=[]
-    z3=[]
-    z4=[]
-    for j in range(fftz):
-        t=pa[j+i*fftz].split()
-        z1.append(t)
-    
-        t=pb[j+i*fftz].split()
-        z2.append(t)
-    
-        t=paa[j+i*fftz].split()
-        z3.append(t)
-    
-        t=pbb[j+i*fftz].split()
-        z4.append(t)
-    
-    z1=np.array(z1,float)
-    z2=np.array(z2,float)
-    z3=np.array(z3,float)
-    z4=np.array(z4,float)
-    
-    ###############################################################################################################
 
     zx1=z1[:,0]-val1
     zx2=z2[:,0]-val2
@@ -288,10 +212,9 @@ for i in range(frames):
     sssum1,sssum2,sssum3,sssum4=0.00, 0.00, 0.00, 0.00
 
     cutoff,cutoff2=mid1,mmid1     
-    cutoff,cutoff2=-100,100 
     for j in range(len(zx1)):
 
-        kk=zx1[(zx1 > 1.0) & (zy1 < 0)]
+        kk=zx1[(zx1 > 0.5) & (zy1 < 0)]
         if zx1[j] >= kk[0]:
             ssum1=ssum1+zy1[j]*dz
     
@@ -300,21 +223,19 @@ for i in range(frames):
  
     
     cutoff,cutoff2=mid2,mmid2     
-    cutoff,cutoff2=-100,100 
     for j in range(len(zx2)):
 
-        kk=zx2[(zx2 > 1.0) & (zy2 < 0)]
-        if zx2[j] >= kk[-1]:
+        kk=zx2[(zx2 > 0.5) & (zy2 < 0)]
+        if zx2[j] >= kk[0]:
             ssum2=ssum2+zy2[j]*dz
 
         if zx2[j] >= cutoff and zx2[j] < cutoff2:
             sssum2=sssum2-zx2[j]*zy2[j]*dz
     
     cutoff,cutoff2=mid3,mmid3     
-    cutoff,cutoff2=-100,100 
     for j in range(len(zx3)):
 
-        kk=zx3[(zx3 > 1.0) & (zy3 < 0)]
+        kk=zx3[(zx3 > 0.5) & (zy3 < 0)]
         if zx3[j] >= kk[0]:
             ssum3=ssum3+zy3[j]*dz
 
@@ -322,11 +243,10 @@ for i in range(frames):
             sssum3=sssum3-zx3[j]*zy3[j]*dz
     
     cutoff,cutoff2=mid4,mmid4     
-    cutoff,cutoff2=-100,100 
     for j in range(len(zx4)):
 
-        kk=zx4[(zx4 > 1.0) & (zy4 < 0)]
-        if zx4[j] >= kk[-1]:
+        kk=zx4[(zx4 > 0.5) & (zy4 < 0)]
+        if zx4[j] >= kk[0]:
             ssum4=ssum4+zy4[j]*dz
     
         if zx4[j] >= cutoff and zx4[j] < cutoff2:
@@ -383,7 +303,11 @@ print ('std=',np.std(wwf1),np.std(wwf3),'---',np.std(wwf2),np.std(wwf4))
 
 ###########################################################################
 zx1,zy1,ey1=np.mean(kx1,axis=1),np.mean(ky1*const1,axis=1),np.std(ky1*const1,axis=1)
+zx2,zy2,ey2=np.mean(kx2,axis=1),np.mean(ky2*const1,axis=1),np.std(ky2*const1,axis=1)
 zx3,zy3,ey3=np.mean(kx3,axis=1),np.mean(ky3*const1,axis=1),np.std(ky3*const1,axis=1)
+zx4,zy4,ey4=np.mean(kx4,axis=1),np.mean(ky4*const1,axis=1),np.std(ky4*const1,axis=1)
+
+
 
 ###########################################################################
 ###########################################################################
@@ -397,13 +321,28 @@ plt.errorbar(zx3,zy3, ey3, color='red' , label='clean: BOMD+PIGLET')
 plt.axhline(y=0.0, color = 'k',linewidth=1, linestyle = '--')
 plt.axvline(x=0.0, color = 'k',linewidth=1, linestyle = '--')
 plt.legend(prop={'size': 6},loc=0)
-plt.xticks(np.arange(-20,100,2.0),size=10)
-plt.yticks(np.arange(-5,5,1),size=12)
+plt.xticks(np.arange(-100,100,2.0),size=10)
+plt.yticks(size=10)
+plt.xlim(-10,10)
 plt.ylim(-1.5,1.5)
-plt.xlim(-7,7)
 plt.xlabel(r'Distance from Pt surface (Å)',size=10)
-plt.ylabel('$\Delta ρ $(z) (e/Å)',size=10)
+plt.ylabel('$\Delta ρ $(z) (e/Å$^3$)',size=10)
 
+
+ax1 = fig.add_subplot(212)
+
+plt.errorbar(zx2,zy2,ey2, color='darkorange' ,label='0.5 ML: BOMD')
+plt.errorbar(zx4,zy4,ey4, color='green', label='0.5ML: BOMD+PIGLET')
+
+plt.axhline(y=0.0, color = 'k',linewidth=1, linestyle = '--')
+plt.axvline(x=0.0, color = 'k',linewidth=1, linestyle = '--')
+plt.legend(prop={'size': 6},loc=0)
+plt.xticks(np.arange(-100,100,2.0),size=10)
+plt.yticks(size=10)
+plt.xlim(-10,10)
+plt.ylim(-1.5,1.5)
+plt.xlabel(r'Distance from Pt surface (Å)',size=10)
+plt.ylabel('$\Delta ρ $(z) (e/Å$^3$)',size=10)
 
 plt.subplots_adjust(wspace=0.4,hspace=0.4)
 plt.savefig("photo_1.jpg", dpi=300, bbox_inches = 'tight',    pad_inches = 0.1)

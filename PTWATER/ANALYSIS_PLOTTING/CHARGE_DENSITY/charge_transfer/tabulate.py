@@ -139,14 +139,14 @@ for i in range(frames):
 
 ###
     for j in range(660-30,660):
-        t=b[j+i*660].split()
+        t=b[j+i*675].split()
         a2.append(t)
     for j in range(660-120,660-120+30):
-        t=b[j+i*660].split()
+        t=b[j+i*675].split()
         b2.append(t)
     d2=[]
     for j in range(0,540):
-        t=b[j+i*660].split()
+        t=b[j+i*675].split()
         d2.append(t)
 
     d2=np.array(d2,float)
@@ -169,14 +169,14 @@ for i in range(frames):
 
 ###
     for j in range(660-30,660):
-        t=bb[j+i*660].split()
+        t=bb[j+i*675].split()
         a4.append(t)
     for j in range(660-120,660-120+30):
-        t=bb[j+i*660].split()
+        t=bb[j+i*675].split()
         b4.append(t)
     d4=[]
     for j in range(0,540):
-        t=bb[j+i*660].split()
+        t=bb[j+i*675].split()
         d4.append(t)
 
     d4=np.array(d4,float)
@@ -384,8 +384,8 @@ fig=plt.figure()
 ax1 = fig.add_subplot(211)
 
 
-plt.errorbar(zx1,zy1, ey1, color='blue',label='clean: QMMM')
-plt.errorbar(zx3,zy3, ey3, color='red' , label='clean: QMMM+PIGLET')
+plt.errorbar(zx1,zy1, ey1, color='blue',label='clean: BOMD')
+plt.errorbar(zx3,zy3, ey3, color='red' , label='clean: BOMD+PIGLET')
 
 plt.axhline(y=0.0, color = 'k',linewidth=1, linestyle = '--')
 plt.axvline(x=0.0, color = 'k',linewidth=1, linestyle = '--')
@@ -393,15 +393,15 @@ plt.legend(prop={'size': 6},loc=0)
 plt.xticks(np.arange(-100,100,2.0),size=10)
 plt.yticks(size=10)
 plt.xlim(-10,10)
-#plt.ylim(0,4.2)
+plt.ylim(-1.5,1.5)
 plt.xlabel(r'Distance from Pt surface (Å)',size=10)
 plt.ylabel('$\Delta ρ $(z) (e/Å$^3$)',size=10)
 
 
 ax1 = fig.add_subplot(212)
 
-plt.errorbar(zx2,zy2,ey2, color='darkorange' ,label='0.5 ML: QMMM')
-plt.errorbar(zx4,zy4,ey4, color='green', label='0.5ML: QMMM+PIGLET')
+plt.errorbar(zx2,zy2,ey2, color='darkorange' ,label='0.5 ML: BOMD')
+plt.errorbar(zx4,zy4,ey4, color='green', label='0.5ML: BOMD+PIGLET')
 
 plt.axhline(y=0.0, color = 'k',linewidth=1, linestyle = '--')
 plt.axvline(x=0.0, color = 'k',linewidth=1, linestyle = '--')
@@ -409,7 +409,7 @@ plt.legend(prop={'size': 6},loc=0)
 plt.xticks(np.arange(-100,100,2.0),size=10)
 plt.yticks(size=10)
 plt.xlim(-10,10)
-#plt.ylim(0,4.2)
+plt.ylim(-1.5,1.5)
 plt.xlabel(r'Distance from Pt surface (Å)',size=10)
 plt.ylabel('$\Delta ρ $(z) (e/Å$^3$)',size=10)
 

@@ -171,6 +171,17 @@ for i in range(frames):
  
     ###############################################################################################################
     
+sum1=np.zeros(frames,float)
+sum2=np.zeros(frames,float)
+sum3=np.zeros(frames,float)
+sum4=np.zeros(frames,float)
+
+for i in range(frames):
+    sum1[i]=ky1[350,i]-ky1[280,i]
+    sum2[i]=ky2[350,i]-ky2[280,i]
+    sum3[i]=ky3[350,i]-ky3[280,i]
+    sum4[i]=ky4[350,i]-ky4[280,i]
+    print (i,sum2[i])
     
 zx1,zy1,ey1=np.mean(kx1,axis=1),np.mean(ky1,axis=1),np.std(ky1,axis=1)
 zx2,zy2,ey2=np.mean(kx2,axis=1),np.mean(ky2,axis=1),np.std(ky2,axis=1)
@@ -178,9 +189,9 @@ zx3,zy3,ey3=np.mean(kx3,axis=1),np.mean(ky3,axis=1),np.std(ky3,axis=1)
 zx4,zy4,ey4=np.mean(kx4,axis=1),np.mean(ky4,axis=1),np.std(ky4,axis=1)
 
 print ('WF_change')
-print (-(zy1[350]-zy1[280]),'---',-(zy3[350]-zy3[280]))
+print (np.mean(sum1),'+',np.std(sum1),'---',np.mean(sum3),'+',np.std(sum3))
 print ('WF_change')
-print (-(zy2[350]-zy2[280]),'---',-(zy4[350]-zy4[280]))
+print (np.mean(sum2),'+',np.std(sum2),'---',np.mean(sum4),'+',np.std(sum4))
 
 ###########################################################################
 fig=plt.figure()
