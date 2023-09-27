@@ -1,0 +1,10 @@
+TITLE     GROningen MAchine for Chemical Simulation
+REMARK    THIS IS A SIMULATION BOX
+CRYST1   30.000   30.000   30.000  90.00  90.00  90.00 P 1           1
+MODEL        1
+ATOM      1  OW  SOL     1      15.047  14.613  15.078  1.00  0.00            
+ATOM      2  HW1 SOL     1      14.506  15.012  14.397  1.00  0.00            
+ATOM      3  HW2 SOL     1      15.449  15.354  15.530  1.00  0.00            
+ATOM      4  MW  SOL     1      15.029  14.759  15.049  1.00  0.00            
+TER
+ENDMDL

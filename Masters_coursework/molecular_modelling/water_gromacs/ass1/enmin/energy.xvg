@@ -1,0 +1,38 @@
+# This file was created Fri Nov 11 13:50:11 2016
+# by the following command:
+# g_energy -f ener.edr -s em.tpr 
+#
+# g_energy is part of G R O M A C S:
+#
+# GROtesk MACabre and Sinister
+#
+@    title "Gromacs Energies"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "(kJ/mol)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Potential"
+    0.000000    8.552277
+    5.000000    7.814229
+    7.000000    0.191861
+   10.000000    0.102126
+   12.000000    0.040494
+   14.000000    0.024569
+   16.000000    0.001649
+   19.000000    0.000762
+   21.000000    0.000278
+   23.000000    0.000163
+   25.000000    0.000061
+   27.000000    0.000034
+   29.000000    0.000016
+   30.000000    0.000011
+   32.000000    0.000003
+   34.000000    0.000002
+   36.000000    0.000001
+   37.000000    0.000000
+   39.000000    0.000000
