@@ -1,0 +1,106 @@
+\documentclass[oneside,12pt,a4paper]{Classes/Unmesh}
+
+\title{Nuclear Quantum Effects in Hydrogen-Bonded Systems: A Path Integral Molecular Dynamics Study}
+\degree{DOCTOR OF PHILOSOPHY   
+}
+\author {Unmesh Mondal}
+\crest{\includegraphics[width=30mm]{UnivShield}}
+%
+  \university{Indian Institute of Science Education and Research, Pune\\[1ex]}
+  \degreedate{2023}
+%\usepackage{StyleFiles/watermark}
+\usepackage{setspace}
+\usepackage[toc,page]{appendix}
+\usepackage{comment}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{xr}
+
+
+%\DeclareUnicodeCharacter{030C}{\textcolor{red}{BAD1!!}}
+
+
+\onehalfspacing
+\titleformat{\chapter}[display]
+  {\bfseries\Large\rmfamily\selectfont\color{black}}
+  {\filright{\chaptertitlename} \Large\thechapter}
+  {1ex}
+  {\color{white}\titlerule\linewidth=48pt\vspace{0.5ex}\filleft\bfseries\Large\rmfamily\selectfont\color{black}}
+  [\vspace{0.5ex}\color{gray}\titlerule\linewidth=18pt]
+  
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\usepackage{titlesec}
+\usepackage{etoolbox}
+
+\makeatletter
+\patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
+\patchcmd{\ttlh@hang}{\noindent}{}{}{}
+\makeatother
+\usepackage{lipsum}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shapes.arrows}
+\usetikzlibrary{matrix,shapes,arrows,positioning,chains}
+\usepackage{array} 
+\usepackage{amsmath}
+
+\tikzstyle{decision} = [diamond, draw, thick, fill=blue!20, text width=10em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [draw, thick, rectangle,  fill=white!20, text width=20em, text centered, minimum height=3em,inner sep=0pt ]
+\tikzstyle{cloud} = [draw, thick, ellipse, fill=white!20, text width=7em, text centered, node distance=5cm, minimum height=2em, inner sep=0pt]
+\tikzstyle{rect} = [draw, thick, rectangle, fill=white!20, text width=10em, text centered, rounded corners, minimum height=2em, inner sep=0pt]
+\tikzstyle{line} = [draw, thick, ->, shorten >=2pt, -latex']    
+    
+\begin{document}
+\maketitle
+\pagenumbering{roman}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{4}
+
+\frontmatter 
+\include{Certificate/certificate}
+\include{Declaration/declaration}
+\pagestyle{plain}
+\include{Acknowledgements/acknowledgments}
+\include{Publications/publications} 
+\include{Synopsis/synopsis}  
+\include{Symbols/symbols}
+
+\tableofcontents  \newpage
+\clearpage
+\pagestyle{plain}
+\listoffigures \newpage
+\listoftables \newpage
+
+\mainmatter 
+
+
+\include{Introduction/introduction}
+\include{Comp_methods/Methods}
+\include{Chapter1/Chapter1}
+\include{Chapter3/Chapter3}
+\include{Introduction/summary}
+
+
+
+\appendix
+
+\include{Appendix4/appendix4}
+\include{Appendix5/appendix5}
+\include{Appendix2/appendix2}
+\include{Appendix3/appendix3}
+
+\appendix
+
+
+\bibliographystyle{Classes/acs}
+\bibliography{References/Ref_ACS}
+\end{document}
